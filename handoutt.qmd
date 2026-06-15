@@ -1,0 +1,238 @@
+---
+title: "Interactive Business Analytics Using R and Shiny: The Radiant Package"
+shorttitle: "Interactive Business Analytics"
+author:
+  - name: "Nwanneka Genevinne Nnakwuzie"
+    corresponding: true
+    email: "nnakwuzie.nwanneka@stud.hs-fresenius.de [400364109]"
+    affiliations:
+      - name: "Hochschule Fresenius"
+        department: "International Management"
+
+date: "June 16, 2026"
+
+abstract: "Interactive business analytics enables organisations to move beyond static reporting and towards real-time data exploration and decision-making. This handout introduces the concept of interactive analytics and examines the Radiant package, an open-source business analytics platform built on R and Shiny. Radiant provides a browser-based interface that allows users to perform data visualisation, statistical analysis, and predictive modelling without extensive programming knowledge while maintaining reproducibility through automatically generated R code. The handout further discusses the role of Shiny as the reactive framework underlying Radiant and demonstrates the practical application of interactive analytics through a customer segmentation example using K-means clustering. The discussion highlights how interactive analytical tools improve accessibility, support data-driven decision-making, and create business value through faster insight generation and improved resource allocation."
+
+keywords:
+  - Interactive Analytics
+  - Radiant
+  - Shiny
+  - Business Analytics
+  - Customer Segmentation
+
+bibliography: reference.bib
+floatsintext: true
+fig-cap-location: bottom
+
+format:
+  html:
+    toc: false
+  apaquarto-pdf:
+    documentmode: stu
+    papersize: a4
+    course: "Data Analysis for Decision-Making (SS 2026)"
+    professor: "Prof. Dr. Stephan Huber"
+    duedate: "2026-06-16"
+---
+
+# Introduction
+
+Interactive business analytics represents a paradigm shift in how organizations approach decision-making with data [@chen2012]. Traditional business analytics relies on static reports produced by data analysts and distributed to decision-makers creating delays that allows strategic opportunities to pass [@davenport2013]. Interactive analytics transforms this workflow by placing analytical capability directly in the hands of business users , enabling real-time exploration, hypothesis testing, and discovery-oriented analysis that static reports cannot support [@few2013; @shneiderman1996].
+
+By reducing dependency on data analysts, organizations can scale analytical capability across broader populations [@chen2012]. Interactive tools democratize access to insights, enabling business professionals without statistical training to conduct meaningful analyses [@wickham2021]. Accelerating decision-making cycles and encouraging data-driven organizational culture [@few2013]. The Radiant package operationalizes these principles through a browser-based interface built on R and Shiny, providing both a point-and-click interface for accessibility and underlying R code for reproducibility [@nijs2024; @chang2021].
+
+## The Radiant Package: Interactive Analytics in Practice
+
+Radiant is an open-source R package that provides a browser-based platform for business analytics [@nijs2024]. Developed by Vincent Nijs and distributed freely via GitHub and CRAN, Radiant transforms R from a command-line statistical tool into a point-and-click analytics platform. Users launch Radiant from R, which opens a local web server displaying an interactive interface. All computations occur in R; the interface merely provides access to R's analytical capabilities without requiring users to write code.
+
+## Core Functionality
+
+Radiant organizes analytical tasks into several integrated modules [@nijs2024]:
+
+- **Data:** Importing, cleaning, and transforming datasets.
+- **Basics:** Exploratory analysis and data visualisation.
+- **Model:** Regression and predictive analytics.
+- **Multivariate:** Cluster analysis, factor analysis, and principal component analysis.
+- **Report:** Automatic generation of reproducible analytical outputs.
+
+All operations generate corresponding R code, making workflows transparent and reproducible. This dual nature point-and-click interface for accessibility, generated code for reproducibility that makes Radiant suitable for both business professionals and students developing analytical skills.
+
+### Technical Foundation: Shiny and Reactivity
+
+Radiant's interactivity depends on Shiny, an R framework for building interactive web applications [@chang2021]. Shiny implements reactive programming, where outputs automatically update when inputs change, eliminating the need for "Refresh" buttons or manual recalculation. When a Radiant user adjusts a parameter slider, Shiny detects the change, recalculates dependent computations, and updates the display, all within milliseconds [@wickham2021]. The following code demonstrates the basic structure of a shiny application:
+
+```{r}
+#| eval: false
+#| echo: true
+
+library(shiny)
+
+ui <- fluidPage(
+  sliderInput("threshold", "Sales Threshold:",
+              min = 0, max = 100000, value = 50000),
+  plotOutput("salesPlot")
+)
+
+server <- function(input, output) {
+  output$salesPlot <- renderPlot({
+    # Plotting code reacts automatically when input$threshold changes
+  })
+}
+
+shinyApp(ui = ui, server = server)
+```
+
+The `ui` component defines what users see, `server` defines how the application responds, and `shinyApp()` combines both. For organizations requiring custom workflows or branding, Shiny can be deployed via shinyapps.io (free tier), Shiny Server (open-source), or RStudio Connect (enterprise), making it a flexible foundation beyond Radiant [@chang2021].
+
+## Practical Application: Customer Segmentation Analysis
+
+Customer segmentation divides a customer base into distinct, internally homogeneous groups for targeted marketing, personalized service, and resource allocation [@smith1956; @wedel2000]. K-means clustering is a widely-used segmentation method that partitions customers into k groups by minimizing within-group variation [@hartigan1979]. This section demonstrates customer segmentation using Radiant with a practical example.
+
+### Data and Methods
+
+Consider a retail organization with 100 customers described by three variables: age (18–70 years), annual income (\$30,000–\$90,000), and spending score (1–100, reflecting purchase frequency and amount). The organization seeks to identify customer segments for targeted marketing campaigns. K-means clustering partitions customers into k=3 segments by minimizing the sum of squared distances from each customer to their segment's center, revealing groups with distinct demographic and behavioral characteristics [@wedel2000; @punj1983].
+
+### Performing Analysis in Radiant
+
+Customer segmentation in Radiant follows a point-and-click workflow through the Multivariate module. Users do not write code manually. Radiant executes the analysis through its graphical interface and generates the underlying R code automatically.
+
+Using Radiant's Multivariate module, users perform clustering in four steps:
+
+1.  **Load data:** Import `customer_data.csv` through Radiant's Data module
+2.  **Select variables:** Choose Age, AnnualIncome, and SpendingScore as clustering variables
+3.  **Specify parameters:** Set number of clusters k=3, choose k-means algorithm, set random seed for reproducibility
+4.  **Run analysis:** Click "Estimate" to perform clustering
+
+**Step 1 - Launch Radiant:**
+
+```{r}
+#| eval: false
+#| echo: true
+
+library(radiant)
+radiant()
+```
+
+**Step 2 — Load data:** Navigate to Data → Manage → Load data → select `customer_data.csv` → click Load.
+
+**Step 3 — Verify the dataset:** Go to Data → View and confirm these columns are present:
+
+| Age | AnnualIncome | SpendingScore |
+|-----|--------------|---------------|
+| 19  | 15000        | 39            |
+| 21  | 15000        | 81            |
+
+**Step 4 - Configure clustering:** Go to Multivariate → Cluster → select variables: Age, AnnualIncome, SpendingScore → Method: K-means → k = 3 → click **Estimate**.
+
+**Step 5 - Observe interactive output:** Radiant displays cluster results, sizes, means, visual plots, and summary statistics. Changing k from 3 to 4 updates all outputs instantly - this is Shiny's reactivity in action.
+
+The R code Radiant generates automatically in the **Report tab** reveals the underlying computation:
+
+```{r}
+#| label: clustering-code
+#| eval: false
+#| echo: true
+
+library(radiant)
+library(tidyverse)
+
+customer_data <- read.csv("customer_data.csv")
+
+km_result <- kmeans(
+  x = customer_data[, c("Age", "AnnualIncome", "SpendingScore")],
+  centers = 3, nstart = 25, iter.max = 10,
+  algorithm = "Hartigan-Wong"
+)
+
+customer_data$Segment <- factor(km_result$cluster)
+
+ggplot(customer_data,
+       aes(x = AnnualIncome, y = SpendingScore, color = Segment)) +
+  geom_point(size = 3, alpha = 0.6) +
+  labs(title = "Customer Segments",
+       x = "Annual Income ($)", y = "Spending Score") +
+  theme_minimal() +
+  scale_color_manual(values = c("#E69F00", "#56B4E9", "#009E73"))
+
+customer_data %>%
+  group_by(Segment) %>%
+  summarise(
+    Count = n(),
+    Mean_Age = round(mean(Age), 1),
+    Mean_Income = round(mean(AnnualIncome), 0),
+    Mean_Spending = round(mean(SpendingScore), 1),
+    .groups = 'drop'
+  )
+```
+
+![Customer segmentation output from Radiant's Multivariate module.](customers_data_kclustering.png){#fig-clustering fig-align="center" width="70%"}
+
+### Interpreting Results and Business Application
+
+K-means clustering typically reveals three segments corresponding to distinct customer profiles [@punj1983]:
+
+- **Segment 1 - High-Value Customers:** High income, high spending score. Marketing strategy: premium products, loyalty programmes, personalized service.
+- **Segment 2 - Budget-Conscious Customers:** Lower income, lower or moderate spending. Marketing strategy: value bundles, promotional discounts, cost-conscious positioning.
+- **Segment 3 - Growth Potential Customers:** Good income, low spending score. Marketing strategy: personalised campaigns to increase engagement and convert latent purchasing power.
+
+Radiant's interactive interface enables stakeholders to explore alternative segmentation approaches (testing different k values, alternative variables) before implementing decisions [@nijs2024].
+
+## Getting Started with Radiant
+
+Users new to Radiant should follow these steps:
+
+First, install and load Radiant in R:
+
+```{r}
+#| eval: false
+#| echo: true
+
+install.packages("radiant")
+library(radiant)
+radiant()  # Launches Radiant in browser
+```
+
+Second, explore Radiant's tutorials and documentation. The official Radiant documentation at <https://radiant-rstats.github.io/docs/> provides comprehensive guides. The "Report" tab in Radiant displays R code underlying all analyses, enabling users to learn R programming by examining generated code [@nijs2024].
+
+Third, apply Radiant to real analytical questions in your organization. Starting with straightforward visualization and summary statistics builds familiarity before progressing to more complex analyses like regression and clustering.
+
+Finally, examine generated R code and modify it for your specific needs. Many Radiant users begin with the graphical interface, graduate to examining generated code, and eventually write custom R scripts for specialized analyses [@nijs2024].
+
+## Conclusion
+
+Interactive business analytics powered by tools like Radiant addresses fundamental organizational challenges in decision-making. By reducing delays in analytical workflows, democratizing analytics access, and supporting exploratory data analysis, interactive tools enable faster, more informed decisions [@chen2012; @few2013]. Radiant operationalizes these principles through a browser-based interface that makes sophisticated R-based analyses accessible to business professionals without programming expertise [@nijs2024]. Whether through Radiant's point-and-click interface or custom Shiny applications, interactive analytics represents the future of business decision-making, and students and professionals who develop skills position themselves as valuable contributors to data-driven organizations [@wickham2021].
+
+\newpage
+
+## References
+
+::: {#refs}
+:::
+
+\newpage
+
+## Affidavit
+
+I hereby affirm that this submitted paper was authored unaided and solely by me. Additionally, no other sources than those in the reference list were used. Parts of this paper, including tables and figures, that have been taken either verbatim or analogously from other works have in each case been properly cited with regard to their origin and authorship. This paper either in parts or in its entirety, be it in the same or similar form, has not been submitted to any other examination board and has not been published.
+
+I acknowledge that the university may use plagiarism detection software to check my thesis. I agree to cooperate with any investigation of suspected plagiarism and to provide any additional information or evidence requested by the university.
+
+**Submission Checklist**
+
+- [x] The handout contains 3–5 pages of text.
+- [x] The submission contains the Quarto file of the handout.
+- [x] The submission contains the Quarto file of the presentation.
+- [x] The submission contains the HTML file of the handout.
+- [x] The submission contains the HTML file of the presentation.
+- [x] The submission contains the PDF file of the handout.
+- [x] The submission contains the PDF file of the presentation.
+- [x] The title page of the presentation and the handout contain personal details (name, email, matriculation number).
+- [x] The handout contains a bibliography, created using BibTeX with an APA citation style.
+- [x] Either the handout or the presentation contains R code that proves the expertise in coding.
+- [x] The filled out Affidavit.
+- [x] The link to the presentation and the handout published on GitHub.
+
+**GitHub Repository:** <https://github.com/Gennyn/Gennyn.github.io> \
+**Presentation URL:** [https://gennyn.github.io/presentation.html](https://%5Byour-username%5D.github.io/%5Brepo-name%5D/presentation.html){.uri}
+
+Nwanneka Genevinne Nnakwuzie, June 16, 2026, Cologne, Germany
