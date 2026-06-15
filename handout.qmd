@@ -232,7 +232,7 @@ I acknowledge that the university may use plagiarism detection software to check
 - [x] The filled out Affidavit.
 - [x] The link to the presentation and the handout published on GitHub.
 
-**GitHub Repository:** <https://github.com/Gennyn/Gennyn.github.io> \
-**Presentation URL:** [https://gennyn.github.io/presentation.html](https://%5Byour-username%5D.github.io/%5Brepo-name%5D/presentation.html){.uri}
+[GitHub Profile](https://github.com/Gennyn) \
+[Presentation url](https://gennyn.github.io/presentation.html)
 
 Nwanneka Genevinne Nnakwuzie, June 16, 2026, Cologne, Germany
