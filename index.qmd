@@ -1,0 +1,20 @@
+---
+title: "Interactive Business Analytics Using R and Shiny"
+format: html
+---
+
+\# Interactive Business Analytics Using R and Shiny
+
+\## Project Outputs
+
+\### Presentation
+
+\[View Presentation\](presentation.html)
+
+\### Handout
+
+\[View Handout\](handout.html)
+
+\### GitHub Repository
+
+\[View Repository\](https://github.com/Gennyn/Gennyn.github.io)
