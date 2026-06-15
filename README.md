@@ -1,6 +1,6 @@
 # Interactive Business Analytics
 
-#https://gennyn.github.io/
+[gennyn.github.io](https://gennyn.github.io/)
 
 [GitHub Repository](https://github.com/Gennyn/Gennyn.github.io)
 
