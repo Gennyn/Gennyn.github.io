@@ -175,7 +175,7 @@ library(radiant)
 radiant()
 ```
 
-**Step 2 - Load data:** Data → Manage → Load data → select `customer_data.csv` → click **Load**
+**Step 2 - Load data:** Data → Manage → Load data → select `customers_data.csv` → click **Load**
 
 **Step 3 - Verify dataset:** Data → View → confirm columns are present:
 

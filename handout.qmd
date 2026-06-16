@@ -136,17 +136,17 @@ The R code Radiant generates automatically in the **Report tab** reveals the und
 library(radiant)
 library(tidyverse)
 
-customer_data <- read.csv("customer_data.csv")
+customers_data <- read.csv("customers_data.csv")
 
 km_result <- kmeans(
-  x = customer_data[, c("Age", "AnnualIncome", "SpendingScore")],
+  x = customers_data[, c("Age", "AnnualIncome", "SpendingScore")],
   centers = 3, nstart = 25, iter.max = 10,
   algorithm = "Hartigan-Wong"
 )
 
-customer_data$Segment <- factor(km_result$cluster)
+customers_data$Segment <- factor(km_result$cluster)
 
-ggplot(customer_data,
+ggplot(customers_data,
        aes(x = AnnualIncome, y = SpendingScore, color = Segment)) +
   geom_point(size = 3, alpha = 0.6) +
   labs(title = "Customer Segments",
@@ -154,7 +154,7 @@ ggplot(customer_data,
   theme_minimal() +
   scale_color_manual(values = c("#E69F00", "#56B4E9", "#009E73"))
 
-customer_data %>%
+customers_data %>%
   group_by(Segment) %>%
   summarise(
     Count = n(),
