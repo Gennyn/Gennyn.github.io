@@ -3,16 +3,16 @@ title: "Interactive Business Analytics Using R and Shiny"
 format: html
 ---
 
-## You can click the link, type it into your browser, or scan the QR code below.
+## \## Access My Project  Scan the QR code or visit the website below:
 
 🔗 **Website:** <https://gennyn.github.io/>
-
-## Project Materials                                               
-
-[Handout](https://gennyn.github.io/handout.html)
-
-[Presentation](https://gennyn.github.io/presentation.html)
 
 ::: text-center
 ![](qr_code.png){width="250px"}
 :::
+
+## Project Materials
+
+[Handout](https://gennyn.github.io/handout.html)
+
+[Presentation](https://gennyn.github.io/presentation.html)
