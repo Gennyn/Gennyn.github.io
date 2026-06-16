@@ -2,9 +2,9 @@
 title: "Interactive Business Analytics Using R and Shiny: The Radiant Package"
 shorttitle: "Interactive Business Analytics"
 author:
-  - name: "Nwanneka Genevinne Nnakwuzie"
+  - name: "Nwanneka Genevinne Nnakwuzie [400364109]"
     corresponding: true
-    email: "nnakwuzie.nwanneka@stud.hs-fresenius.de [400364109]"
+    email: "nnakwuzie.nwanneka@stud.hs-fresenius.de"
     affiliations:
       - name: "Hochschule Fresenius"
         department: "International Management"
@@ -232,7 +232,6 @@ I acknowledge that the university may use plagiarism detection software to check
 - [x] The filled out Affidavit.
 - [x] The link to the presentation and the handout published on GitHub.
 
-[GitHub Profile](https://gennyn.github.io/) \
 [Presentation url](https://gennyn.github.io/presentation.html)
 
 Nwanneka Genevinne Nnakwuzie, June 16, 2026, Cologne, Germany
